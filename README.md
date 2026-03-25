@@ -1,78 +1,79 @@
-# 🐍 Pexels Image & Video Downloader
+# 🐍 Python Project Template
 
-A simple Python tool to **download images and videos** from [Pexels](https://www.pexels.com) using their public API.  
-Each keyword gets its own folder under `/output`, containing downloaded images and videos.
-
-This project uses [**uv**](https://github.com/astral-sh/uv) — a fast, modern Python package and environment manager.
+A clean, modular starter template for Python projects. This structure is designed to be scalable, using a dedicated
+`service` layer and a centralized `config` for environment management.
 
 ---
+
+## 📂 Project Structure
+
+```text
+python-init-template/
+├── input/              # Default directory for local files/data
+├── src/
+│   ├── service/        # Business logic and external API services
+│   │   └── test_service.py
+│   ├── config.py       # Centralized configuration & path management
+│   └── main.py         # Entry point
+├── .env                # Environment variables (API keys, settings)
+├── requirements.txt    # Project dependencies
+└── run.bat             # Quick-start script for Windows
+```
 
 ## 🚀 Features
 
-- Download both **images** and **videos** for a list of keywords.
-- **Multi-threaded downloads** for faster parallel processing.
-- Configurable limits via `.env` file.
-
-- Easy setup with `uv` (no manual `venv` or `pip` commands needed).
-
----
-
-## 🧩 Prerequisites
-
-- Python **3.9+**
-- A [Pexels API key](https://www.pexels.com/api/new/)
-- `uv` installed
-
-### Install `uv`
-
-#### macOS / Linux
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-```
-
-#### Windows (PowerShell)
-
-```powershell
-winget install --id=astral-sh.uv  -e
-```
-
-## 🔧 Configuration
-
-Create a `.env` file in the project root with your API key and limits:
-
-```env
-PEXELS_API_KEY=YOUR_PEXELS_API_KEY
-IMAGE_LIMIT=5
-VIDEO_LIMIT=3
-MAX_WORKERS=5
-```
-
-- `MAX_WORKERS`: Number of parallel download threads (default: 5). Increase for faster downloads, but be mindful of API rate limits.
-
-You can modify the code to load from a file `keywords.txt` if needed.
+- **Modular Design:** Logic is separated into services to keep `main.py` clean.
+- **Environment Management:** Pre-configured with `python-dotenv` for security.
+- **Path Safety:** Automatic folder creation (e.g., `/input`) via `config.py`.
+- **Essential Toolkit:** Includes `requests`, `tqdm` for progress bars, and `Pillow` for image processing.
 
 ---
 
-## 🏃 Run the tool
+## 🔧 Setup
 
-### Windows (Easiest)
-Double-click `run.bat` or run:
+1. **Install Dependencies**
+   If you are using `uv`:
+   ```bash
+   uv pip install -r requirements.txt
+   ```
+   Or using standard `pip`:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Configure Environment**
+   Create a `.env` file in the root directory:
+   ```env
+   APP_NAME=MyPythonProject
+   DEBUG=True
+   # Add your API keys below
+   ```
+
+---
+
+## 🏃 How to Run
+
+### Windows (Recommended)
+
+Simply double-click `run.bat` or run:
+
 ```batch
 run.bat
 ```
 
 ### Manual Run
+
+Ensure your virtual environment is active, then run:
+
 ```bash
-uv venv
-uv pip install -r requirements.txt
-uv run python -m src.main
+python src/main.py
 ```
 
-OR (with auto-install dependencies)
-```bash
-uv run --with requirements.txt python -m src.main
-```
+---
 
-## References
+## 📦 Included Libraries
 
-* [uv by Astral](https://github.com/astral-sh/uv)
+| Library           | Purpose                                  |
+|:------------------|:-----------------------------------------|
+| **requests**      | Making HTTP/API calls.                   |
+| **python-dotenv** | Managing configuration via `.env` files. |
